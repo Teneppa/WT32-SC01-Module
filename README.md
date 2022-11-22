@@ -7,7 +7,7 @@ in case someone else finds the same module.
 The documentation on this module is quite bad, but luckily there is already a couple of projects, so we don't have to reverse engineer the entire thing.
 
 ### Parts
-Okay so in paper this display has a lot of good parts. I will try to get the most important components on this list:
+Okay so on paper this display has a lot of good parts. I will try to get the most important components on this list:
 * ESP32-WROVER-B | Main MCU
 * CP2104 (SIL2104) | USB <-> UART Bridge
 * FT6336U | Touch panel controller
