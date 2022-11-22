@@ -34,7 +34,7 @@ This list might be incomplete, but I'll add more pins along the way
 | 22 | TFT_RST |
 | 23  | TFT_BACKLIGHT |
 
-| Arduino IDE pin   | WT32-SC01 Touch controller |
+| Arduino IDE pin   | FT6336U Touch controller |
 | ------------- | ------------- |
 | 19 | I2C_SCL |
 | 18  | I2C_SDA |
