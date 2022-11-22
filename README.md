@@ -44,7 +44,7 @@ NOTE: To be able to use the I2C-interface on these pins you must use
 For example if you want to use Adafruit_FT6206 you have to change the ```Wire.begin();``` in ```Adafruit_FT6206.cpp``` on line 57 to ```Wire.begin(18,19);```
 
 ### Display driver
-To get the display working, I used the Adafruits [Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library). This library has support for the ST7735 as well as ST7789, which very similar to the ST7796S driver which we might have onboard. They are basically the same driver, but the colors are inversed and the color order is different.
+To get the display working, I used the Adafruits [Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library). This library has support for the ST7735 as well as ST7789, which is very similar to the ST7796S driver which we might have onboard. They are basically the same driver, but the colors are inversed and the color order is different.
 
 For now I'll list all of the modifications needed for the ```Adafruit_ST7789.cpp``` that is included on the Adafruit-ST7735-Library:
 Most of the modifications includes a resolution change or configuration change based on the [datasheet of the ST7796S](https://www.displayfuture.com/Display/datasheet/controller/ST7796s.pdf).
