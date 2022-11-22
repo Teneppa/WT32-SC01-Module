@@ -17,7 +17,7 @@ Okay so on paper this display has a lot of good parts. I will try to get the mos
 
 Key notes:
 * This module DOES NOT HAVE any sort of battery management circuitry, so you have to implement it by yourself if you want to make this battery powered.
-* There is a PDF of this module, but there is not a lot in there. At least the pinouts of the connectors are there.
+* There is a [PDF of this module](http://myosuploads3.banggood.com/products/20220111/20220111020446WT32-SC01DataSheetV3.3.pdf), but there is not a lot in there. At least the pinouts of the connectors are there.
 
 ### Pinout
 This list might be incomplete, but I'll add more pins along the way
