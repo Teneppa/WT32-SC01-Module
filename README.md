@@ -48,37 +48,26 @@ To get the display working, I used the Adafruits [Adafruit-ST7735-Library](https
 
 For now I'll list all of the modifications needed for the ```Adafruit_ST7789.cpp``` that is included on the Adafruit-ST7735-Library:
 Most of the modifications includes a resolution change or configuration change based on the [datasheet of the ST7796S](https://www.displayfuture.com/Display/datasheet/controller/ST7796s.pdf).
-1. ROW 35
+1. ROW 35 -> ``` 	Adafruit_ST7789::Adafruit_ST7789(SPIClass *spiClass, int8_t cs, int8_t dc, int8_t rst) : Adafruit_ST77xx(320, 480, spiClass, cs, dc, rst) {} ```
 * display width and height fix
-* ``` 	Adafruit_ST7789::Adafruit_ST7789(SPIClass *spiClass, int8_t cs, int8_t dc, int8_t rst) : Adafruit_ST77xx(320, 480, spiClass, cs, dc, rst) {} ```
-2. ROW 61
+2. ROW 61 -> ``` 0b01001010, ```
 * MADCTL, Memory Data Access Control, Datasheet page 183
 * Fix mirrored image & color order
-* ``` 0b01001010, ```
-3. ROW 66
+3. ROW 66 -> ``` 320 >> 8, ```
 * CASET, Column Address Set MSB, Datasheet page 170
-``` 320 >> 8, ```
-4. ROW 67
+4. ROW 67 -> ``` 320&0xFF, ```
 * CASET, Column Address Set LSB, Datasheet page 170
-``` 320&0xFF, ```
-5. ROW 71
+5. ROW 71 -> ``` 480>>8, ```
 * RASET, Row Address Set MSB, Datasheet page 172
-``` 480>>8, ```
-6. ROW 72
+6. ROW 72 -> ``` 480&0xFF, ```
 * RASET, Row Address Set LSB, Datasheet page 172
-``` 480&0xFF, ```
-7. ROW 73
+7. ROW 73 -> ``` ST77XX_INVOFF, ST_CMD_DELAY, ```
 * Display inversion OFF, Datasheet page 165
-``` ST77XX_INVOFF, ST_CMD_DELAY, ```
-8. ROW 74
+8. ROW 74 -> ``` 0b00100000, ```
 * INVOFF CMD parameters, specified on page 165
-``` 0b00100000, ```
-9. ROW 121
+9. ROW 121 -> ``` _rowstart = _rowstart2 = (int)((480 - height) / 2); ```
 * Fix row start position
-``` _rowstart = _rowstart2 = (int)((480 - height) / 2); ```
-10. ROW 122
+10. ROW 122 -> ``` _colstart = _colstart2 = (int)((320 - width) / 2); ```
 * Fix column start position
-``` _colstart = _colstart2 = (int)((320 - width) / 2); ```
-11. ROW 129
+11. ROW 129 -> ``` //setRotation(0) ```
 * Disable setRotation, because it doesn't have the proper bits set.
-``` //setRotation(0) ```
