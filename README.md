@@ -71,3 +71,11 @@ Most of the modifications includes a resolution change or configuration change b
 * Fix column start position
 11. ROW 129 -> ``` //setRotation(0) ```
 * Disable setRotation, because it doesn't have the proper bits set.
+
+### Arduino IDE setup
+1. File -> Settings -> Additional Boards Manager URLs -> Add ``` https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json ```
+2. Tools -> Board Manager -> ESP32 -> Install
+3. Tools -> Board -> ESP32 Arduino -> ESP32 Wrover Module
+4. Upload speed 921600 (if the upload fails, try lower speeds)
+5. Settings that worked for me: Flash frequency -> 80 MHz, Flash mode -> QIO, Partition -> Default 4MB with spiffs
+6. Select the right COM port, if it doesn't show up, install the CP210x driver
