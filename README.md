@@ -42,3 +42,43 @@ This list might be incomplete, but I'll add more pins along the way
 NOTE: To be able to use the I2C-interface on these pins you must use
 ```Wire.begin(18,19);``` to be able to get it working. Most of the libraries seem to be using only ```Wire.begin();``` which didn't work for me, and I'd guess that the default I2C pins might be different.
 For example if you want to use Adafruit_FT6206 you have to change the ```Wire.begin();``` in ```Adafruit_FT6206.cpp``` on line 57 to ```Wire.begin(18,19);```
+
+### Display driver
+To get the display working, I used the Adafruits [Adafruit-ST7735-Library](https://github.com/adafruit/Adafruit-ST7735-Library). To get it working, it needs quite a bit of modifications. This library has support for the ST7735 as well as ST7789, which very similar to the ST7796S driver which we might have onboard. They are basically the same driver, but if I remember correctly the colors are inversed, and the ST7796S that we have processes the colors in the order of BGR, where as the ST7789 uses RGB.
+
+For now I'll list all of the modifications needed for the ```Adafruit_ST7789.cpp``` that is included on the Adafruit-ST7735-Library:
+Most of the modifications includes a resolution change or configuration change based on the [datasheet of the ST7796S](https://www.displayfuture.com/Display/datasheet/controller/ST7796s.pdf).
+1. ROW 35
+* display width and height fix
+* ``` 	Adafruit_ST7789::Adafruit_ST7789(SPIClass *spiClass, int8_t cs, int8_t dc, int8_t rst) : Adafruit_ST77xx(320, 480, spiClass, cs, dc, rst) {} ```
+2. ROW 61
+* MADCTL, Memory Data Access Control, Datasheet page 183
+* Fix mirrored image & color order
+* ``` 0b01001010, ```
+3. ROW 66
+* CASET, Column Address Set MSB, Datasheet page 170
+``` 320 >> 8, ```
+4. ROW 67
+* CASET, Column Address Set LSB, Datasheet page 170
+``` 320&0xFF, ```
+5. ROW 71
+* RASET, Row Address Set MSB, Datasheet page 172
+``` 480>>8, ```
+6. ROW 72
+* RASET, Row Address Set LSB, Datasheet page 172
+``` 480&0xFF, ```
+7. ROW 73
+* Display inversion OFF, Datasheet page 165
+``` ST77XX_INVOFF, ST_CMD_DELAY, ```
+8. ROW 74
+* INVOFF CMD parameters, specified on page 165
+``` 0b00100000, ```
+9. ROW 121
+* Fix row start position
+``` _rowstart = _rowstart2 = (int)((480 - height) / 2); ```
+10. ROW 122
+* Fix column start position
+``` _colstart = _colstart2 = (int)((320 - width) / 2); ```
+11. ROW 129
+* Disable setRotation, because it doesn't have the proper bits set.
+``` //setRotation(0) ```
